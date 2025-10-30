@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcar Consulta - Clínica Saúde & Vida</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="marcar-consulta.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>🏥 Clínica Saúde & Vida</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#servicos">Serviços</a></li>
+                    <li><a href="index.html#equipe">Equipe</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="appointment-page">
+        <div class="container">
+            <h2 class="page-title">Agendar Consulta</h2>
+            
+            <!-- Indicador de Progresso -->
+            <div class="progress-bar">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Especialidade</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Médico</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Data e Horário</div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Confirmação</div>
+                </div>
+            </div>
+
+            <!-- Formulário de Agendamento -->
+            <div class="appointment-form">
+                
+                <!-- Etapa 1: Escolher Especialidade -->
+                <div class="form-step active" id="step-1">
+                    <h3>Escolha a Especialidade</h3>
+                    <div class="specialty-grid">
+                        <div class="specialty-card" data-specialty="cardiologia">
+                            <div class="specialty-icon">❤️</div>
+                            <h4>Cardiologia</h4>
+                            <p>Cuidados com o coração</p>
+                        </div>
+                        <div class="specialty-card" data-specialty="dermatologia">
+                            <div class="specialty-icon">🩺</div>
+                            <h4>Dermatologia</h4>
+                            <p>Saúde da pele</p>
+                        </div>
+                        <div class="specialty-card" data-specialty="ortopedia">
+                            <div class="specialty-icon">🦴</div>
+                            <h4>Ortopedia</h4>
+                            <p>Ossos e articulações</p>
+                        </div>
+                        <div class="specialty-card" data-specialty="pediatria">
+                            <div class="specialty-icon">👶</div>
+                            <h4>Pediatria</h4>
+                            <p>Saúde infantil</p>
+                        </div>
+                        <div class="specialty-card" data-specialty="ginecologia">
+                            <div class="specialty-icon">🌸</div>
+                            <h4>Ginecologia</h4>
+                            <p>Saúde da mulher</p>
+                        </div>
+                        <div class="specialty-card" data-specialty="clinica-geral">
+                            <div class="specialty-icon">👨‍⚕️</div>
+                            <h4>Clínica Geral</h4>
+                            <p>Atendimento geral</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Etapa 2: Escolher Médico -->
+                <div class="form-step" id="step-2">
+                    <h3>Escolha o Médico</h3>
+                    <div class="doctor-list" id="doctor-list">
+                        <!-- Médicos serão carregados dinamicamente -->
+                    </div>
+                    <div class="form-navigation">
+                        <button class="btn-secondary" onclick="previousStep()">Voltar</button>
+                    </div>
+                </div>
+
+                <!-- Etapa 3: Escolher Data e Horário -->
+                <div class="form-step" id="step-3">
+                    <h3>Escolha a Data e Horário</h3>
+                    <div class="datetime-selection">
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button class="calendar-nav" id="prev-month">‹</button>
+                                <h4 id="calendar-month-year"></h4>
+                                <button class="calendar-nav" id="next-month">›</button>
+                            </div>
+                            <div class="calendar-weekdays">
+                                <div>Dom</div>
+                                <div>Seg</div>
+                                <div>Ter</div>
+                                <div>Qua</div>
+                                <div>Qui</div>
+                                <div>Sex</div>
+                                <div>Sáb</div>
+                            </div>
+                            <div class="calendar-days" id="calendar-days">
+                                <!-- Dias serão gerados dinamicamente -->
+                            </div>
+                        </div>
+                        <div class="time-slots-container">
+                            <h4>Horários Disponíveis</h4>
+                            <p class="selected-date-info" id="selected-date-info">Selecione uma data</p>
+                            <div class="time-slots" id="time-slots">
+                                <!-- Horários serão gerados dinamicamente -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button class="btn-secondary" onclick="previousStep()">Voltar</button>
+                    </div>
+                </div>
+
+                <!-- Etapa 4: Confirmação -->
+                <div class="form-step" id="step-4">
+                    <h3>Confirme seus Dados</h3>
+                    <div class="confirmation-summary">
+                        <div class="summary-card">
+                            <h4>📋 Resumo da Consulta</h4>
+                            <div class="summary-item">
+                                <strong>Especialidade:</strong>
+                                <span id="confirm-specialty"></span>
+                            </div>
+                            <div class="summary-item">
+                                <strong>Médico(a):</strong>
+                                <span id="confirm-doctor"></span>
+                            </div>
+                            <div class="summary-item">
+                                <strong>Data:</strong>
+                                <span id="confirm-date"></span>
+                            </div>
+                            <div class="summary-item">
+                                <strong>Horário:</strong>
+                                <span id="confirm-time"></span>
+                            </div>
+                        </div>
+
+                        <div class="patient-info">
+                            <h4>👤 Seus Dados</h4>
+                            <form id="patient-form">
+                                <div class="form-group">
+                                    <label for="patient-name">Nome Completo*</label>
+                                    <input type="text" id="patient-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="patient-cpf">CPF*</label>
+                                    <input type="text" id="patient-cpf" placeholder="000.000.000-00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="patient-phone">Telefone*</label>
+                                    <input type="tel" id="patient-phone" placeholder="(00) 00000-0000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="patient-email">E-mail*</label>
+                                    <input type="email" id="patient-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="patient-insurance">Convênio</label>
+                                    <select id="patient-insurance">
+                                        <option value="">Particular</option>
+                                        <option value="unimed">Unimed</option>
+                                        <option value="sulamerica">SulAmérica</option>
+                                        <option value="bradesco">Bradesco Saúde</option>
+                                        <option value="amil">Amil</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="patient-notes">Observações</label>
+                                    <textarea id="patient-notes" rows="3" placeholder="Informe sintomas ou motivo da consulta"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button class="btn-secondary" onclick="previousStep()">Voltar</button>
+                        <button class="btn-primary" onclick="confirmAppointment()">Confirmar Agendamento</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h3>Consulta Agendada com Sucesso!</h3>
+            <p>Você receberá uma confirmação por e-mail e SMS.</p>
+            <p class="appointment-code">Código da consulta: <strong id="appointment-code"></strong></p>
+            <button class="btn-primary" onclick="closeModal()">Fechar</button>
+            <a href="index.html" class="btn-secondary">Voltar para o Início</a>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Clínica Saúde & Vida. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="marcar-consulta.js"></script>
+</body>
+</html>
