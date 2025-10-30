@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Agendamentos - Clínica Saúde & Vida</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="meus-agendamentos.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>🏥 Clínica Saúde & Vida</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#servicos">Serviços</a></li>
+                    <li><a href="marcar-consulta.html">Agendar</a></li>
+                    <li><a href="meus-agendamentos.html" class="active">Meus Agendamentos</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="appointments-page">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Meus Agendamentos</h2>
+                <a href="marcar-consulta.html" class="btn-primary">
+                    ➕ Nova Consulta
+                </a>
+            </div>
+
+            <!-- Filtros e Pesquisa -->
+            <div class="filters-section">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">
+                        Todas (<span id="count-all">0</span>)
+                    </button>
+                    <button class="filter-tab" data-filter="upcoming">
+                        Próximas (<span id="count-upcoming">0</span>)
+                    </button>
+                    <button class="filter-tab" data-filter="past">
+                        Realizadas (<span id="count-past">0</span>)
+                    </button>
+                    <button class="filter-tab" data-filter="cancelled">
+                        Canceladas (<span id="count-cancelled">0</span>)
+                    </button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="🔍 Buscar por médico ou especialidade...">
+                </div>
+            </div>
+
+            <!-- Lista de Agendamentos -->
+            <div class="appointments-list" id="appointments-list">
+                <!-- Agendamentos serão carregados dinamicamente -->
+            </div>
+
+            <!-- Mensagem quando não há agendamentos -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">📅</div>
+                <h3>Nenhum agendamento encontrado</h3>
+                <p>Você ainda não possui consultas agendadas.</p>
+                <a href="marcar-consulta.html" class="btn-primary">Agendar Primeira Consulta</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Cancelamento -->
+    <div class="modal" id="cancel-modal">
+        <div class="modal-content">
+            <div class="warning-icon">⚠️</div>
+            <h3>Cancelar Consulta</h3>
+            <p>Tem certeza que deseja cancelar esta consulta?</p>
+            <div class="cancel-details" id="cancel-details">
+                <!-- Detalhes da consulta a ser cancelada -->
+            </div>
+            <p class="cancel-warning">Esta ação não poderá ser desfeita.</p>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeCancelModal()">Não, manter consulta</button>
+                <button class="btn-danger" onclick="confirmCancellation()">Sim, cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes -->
+    <div class="modal" id="details-modal">
+        <div class="modal-content large">
+            <button class="close-modal" onclick="closeDetailsModal()">✕</button>
+            <h3>Detalhes da Consulta</h3>
+            <div class="appointment-details" id="appointment-details">
+                <!-- Detalhes completos serão carregados aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h3>Consulta Cancelada com Sucesso!</h3>
+            <p>Um e-mail de confirmação foi enviado para você.</p>
+            <button class="btn-primary" onclick="closeSuccessModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Clínica Saúde & Vida. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="meus-agendamentos.js"></script>
+</body>
+</html>
